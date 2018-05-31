@@ -1,4 +1,4 @@
-# neyfrota/filerun
+# Docker filerun
 
 My [filerun](http://www.filerun.com/) install in a docker container. Inspired by [official filerun](https://github.com/filerun/docker) but added uid and gid to match internal container user with external host user.
 
