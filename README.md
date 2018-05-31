@@ -19,7 +19,7 @@ My [filerun](http://www.filerun.com/) install in a docker container. Inspired by
 
 # Running
 
-frota/filerun cannot run alone and need a docker-compose file to add database server
+neyfrota/filerun cannot run alone and need a docker-compose file to add database server
 
 Install [docker](https://www.google.com/search?q=install+docker), [docker-compose](https://www.google.com/search?&q=install+docker-compose) and [docker-compose-for-humans](https://github.com/neyfrota/docker-compose-for-humans) then create a docker-compose.yml file like this.
 
