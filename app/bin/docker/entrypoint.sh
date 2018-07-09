@@ -3,7 +3,7 @@ echo "enter /app/bin/docker/entrypoint.sh"
 
 
 # clean some variables
-export UID=${uid:=1000}
+export uid=${uid:=1000}
 export gid=${gid:=1000}
 export group=filerun
 export username=filerun
