@@ -39,35 +39,20 @@ cp "ioncube/ioncube_loader_lin_7.2.so" $PHP_EXT_DIR
 echo "zend_extension=ioncube_loader_lin_7.2.so" >> /usr/local/etc/php/conf.d/00_ioncube_loader_lin_7.2.ini
 
 
-# Get FileRun
-curl -o filerun.zip -L https://www.filerun.com/download-latest-php71
-unzip filerun.zip -d /var/www/html/
+# Get FileRun and save at image
+curl -o /filerun.zip -L https://www.filerun.com/download-latest-php71
 
 
-# configure apache
-#
-echo "<?php" > /var/www/html/system/data/autoconfig.php
-echo "\$config['db'] = [" >> /var/www/html/system/data/autoconfig.php
-echo "  'type' => 'mysql'," >> /var/www/html/system/data/autoconfig.php
-echo "  'server' => '$MYSQL_HOSTNAME'," >> /var/www/html/system/data/autoconfig.php
-echo "  'database' => '$MYSQL_DATABASE'," >> /var/www/html/system/data/autoconfig.php
-echo "  'username' => '$MYSQL_USER'," >> /var/www/html/system/data/autoconfig.php
-echo "  'password' => '$MYSQL_PASSWORD'" >> /var/www/html/system/data/autoconfig.php
-echo "];" >> /var/www/html/system/data/autoconfig.php
-#
 mkdir /user-files
 ln -s /app/etc/conf-available-filerun.conf /etc/apache2/conf-available/filerun.conf
 a2enconf filerun
-#
 rm -f /etc/apache2/conf-enabled/other-vhosts-access-log.conf
 rm -f /etc/apache2/conf-enabled/localized-error-pages.conf
 rm -f /etc/apache2/conf-enabled/serve-cgi-bin.conf
-#
 rm -f /etc/apache2/conf-enabled/security.conf
 echo "ServerTokens Minimal" >> /etc/apache2/conf-enabled/security.conf
 echo "ServerSignature Off" >> /etc/apache2/conf-enabled/security.conf
 echo "TraceEnable Off" >> /etc/apache2/conf-enabled/security.conf
-#
 service apache2 stop
 
 

@@ -14,12 +14,22 @@ export MYSQL_PASSWORD=${MYSQL_PASSWORD:=filerun}
 export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:=filerun}
 
 
-
-# add user and set permissions
-echo "Setup user and permissions"
+echo "Setup user"
 groupadd --gid $gid $group
 useradd --home-dir /home/$username --no-create-home --non-unique --gid $gid --uid $uid --no-user-group --shell /usr/sbin/nologin $username
 usermod -aG sudo $username
+
+
+if [[ -e /var/www/html/index.php ]]
+then
+	echo "Accept filerun"
+else
+	echo "Install filerun"
+	unzip /filerun.zip -d /var/www/html/
+fi
+
+
+echo "Setup permissions"
 chown -Rf $username:$group /var/www/html
 chown -Rf $username:$group /var/run/apache2*
 chown -Rf $username:$group /var/lock/apache2*
@@ -27,7 +37,6 @@ chown -Rf $username:$group /var/log/apache2*
 chown $username:$group /user-files
 
 
-# db settings
 echo "Setup database"
 echo "<?php" > /var/www/html/system/data/autoconfig.php
 echo "\$config['db'] = [" >> /var/www/html/system/data/autoconfig.php
